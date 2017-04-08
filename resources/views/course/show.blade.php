@@ -5,7 +5,11 @@
 	<p>Teacher: {{$course->teacher_name}}</p><br>
 	<p>Starting date: {{$course->start_date}}</p><br>
 	<p>Ending date: {{$course->end_date}}</p><br>
+{{ Form::open(['method' => 'get', 'action' => ['CourseController@edit', $course->id]]) }}
+	{{ Form::submit('Edit', ['class' => 'btn btn-default']) }}
+{{ Form::close() }}
 {{ Form::open(['method' => 'delete', 'action' => ['CourseController@destroy', $course->id]]) }}
 	{{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
 {{ Form::close() }}
+
 @endsection

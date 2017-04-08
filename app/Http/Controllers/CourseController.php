@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCourse;
 
 use App\Course;
 
@@ -22,7 +22,7 @@ class CourseController extends Controller
     	return view('course.create');
     }
 
-    public function save_course(Request $request) {
+    public function save_course(StoreCourse $request) {
     	$course = new Course();
     	$course->user_id = Auth::user()->id;
     	$course->name = Input::get('name');
@@ -43,5 +43,17 @@ class CourseController extends Controller
     public function destroy(Course $course) {
     	$deletedCourse = Course::where('id', '=', $course->id)->first()->delete();
     	return redirect()->action('CourseController@index')->with('status', 'Course deleted!');
+    }
+
+    public function edit(Course $course) {
+    	return view('course.edit')->with(compact('course'));
+    }
+
+    public function save_update(StoreCourse $request) {
+    	$id = Input::get('id');
+    	$course = Course::where('id', '=', $id)->first();
+    	$course->update($request->all());
+
+    	return redirect()->action('CourseController@index')->with('status', 'Course edited!');
     }
 }
