@@ -32,3 +32,4 @@ Route::delete('/course/{course}', 'CourseController@destroy');
 Route::get('/course/{course}/edit', 'CourseController@edit');
 
 Route::post('/update', 'CourseController@save_update');
+

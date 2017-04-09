@@ -69,6 +69,13 @@
                                             Show my courses
                                         </a>
                                     </li>
+                                    @if (Gate::allows('show-users')) 
+                                        <li>
+                                            <a href="\users">
+                                                Show all users
+                                            </a>
+                                        </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
