@@ -2,7 +2,7 @@
 @section('content')
 @include('layouts/errors')
 
-<form action="/update" method="post">
+<form action="/course/update" method="post">
   {{ csrf_field() }}
   <input type="hidden" name="id" value={{ $course->id }}>
   Course name: <input type="text" name="name" required value={{ $course->name }}><br>

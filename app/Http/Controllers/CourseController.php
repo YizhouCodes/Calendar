@@ -41,7 +41,7 @@ class CourseController extends Controller
     }
 
     public function destroy(Course $course) {
-    	$deletedCourse = Course::where('id', '=', $course->id)->first()->delete();
+    	Course::where('id', '=', $course->id)->first()->delete();
     	return redirect()->action('CourseController@index')->with('status', 'Course deleted!');
     }
 
