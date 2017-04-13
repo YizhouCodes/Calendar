@@ -6,7 +6,7 @@ use Auth;
 
 use Closure;
 
-class AdminMiddleware
+class Permission1Middleware
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,16 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::guest() || $request->user()->roles->find(1) == null) {
+        if (Auth::guest()) {
+            return redirect('/');
+        }
+        $permission_granted = false;
+        foreach ($request->user()->roles as $role) {
+            if ($role->permissions->find(1)) {
+                $permission_granted = true;
+            }
+        }
+        if (!$permission_granted) {
             return redirect('/');
         }
         return $next($request);

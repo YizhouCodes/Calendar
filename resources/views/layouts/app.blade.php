@@ -59,16 +59,23 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="\course\create">
-                                            Create a new course
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="\course\index">
-                                            Show my courses
-                                        </a>
-                                    </li>
+                                    @if (Gate::allows('is-moderator') || Gate::allows('is-student'))
+                                        <li>
+                                            <a href="\course\create">
+                                                Create a new course
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="\course\index">
+                                                Show all courses
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="\my-courses">
+                                                Show my courses
+                                            </a>
+                                        </li>
+                                    @endif
                                     @if (Gate::allows('show-users')) 
                                         <li>
                                             <a href="\users">

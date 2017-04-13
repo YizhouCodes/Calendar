@@ -33,4 +33,13 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
+
+    public function courses() {
+        return $this->hasMany('App\Courses');
+    }
+
+
 }

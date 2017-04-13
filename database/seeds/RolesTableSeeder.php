@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-Use Carbon\Carbon;
+use Carbon\Carbon;
 
 class RolesTableSeeder extends Seeder
 {
@@ -20,14 +20,14 @@ class RolesTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
-         DB::table('roles')->insert([
+        DB::table('roles')->insert([
             'id' => 2,
-            'role' => 'teacher',
+            'role' => 'moderator',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
-          DB::table('roles')->insert([
+        DB::table('roles')->insert([
             'id' => 3,
             'role' => 'student',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

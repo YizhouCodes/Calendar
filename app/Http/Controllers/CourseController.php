@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCourse;
 
+use Illuminate\Http\Request;
+
 use App\Course;
 
 use Auth;
@@ -14,9 +16,15 @@ class CourseController extends Controller
 {
 
 	public function index() {
-		$courses = Course::all();
+        $courses = Course::all();
 		return view('course.index')->with(compact('courses'));
 	}
+
+    public function user_index() {
+        $courses = Course::where('user_id', '=', Auth::user()->id)->get();
+        return view('course.index')->with(compact('courses'));
+    }
+
 
     public function create() {
     	return view('course.create');

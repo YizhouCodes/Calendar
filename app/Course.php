@@ -7,4 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $guarded = ['id'];
+
+    public function comments() {
+    	return $this->hasMany('App\Comment');
+    }
+
+    public function user() {
+    	return $this->hasOne('App\AddedCourses');
+    }
 }

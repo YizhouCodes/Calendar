@@ -19,21 +19,31 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/course/create', 'CourseController@create');
+Route::group(['middleware' => 'App\Http\Middleware\Permission3Middleware'], function() {
 
-Route::post('/', 'CourseController@save_course');
+	Route::get('/course/create', 'CourseController@create');
 
-Route::get('/course/index', 'CourseController@index');
+	Route::post('/', 'CourseController@save_course');
 
-Route::get('/course/{course}', 'CourseController@show');
+	Route::get('/course/index', 'CourseController@index');
 
-Route::delete('/course/{course}', 'CourseController@destroy');
+	Route::get('/my-courses', 'CourseController@user_index');
 
-Route::get('/course/{course}/edit', 'CourseController@edit');
+	Route::get('/course/{course}', 'CourseController@show');
 
-Route::post('/course/update', 'CourseController@save_update');
+	Route::delete('/course/{course}', 'CourseController@destroy');
 
-Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {
+	Route::get('/course/{course}/edit', 'CourseController@edit');
+
+	Route::post('/course/update', 'CourseController@save_update');
+
+	Route::post('/course/{course}/comments', 'CommentsController@store');
+
+});
+
+
+Route::group(['middleware' => 'App\Http\Middleware\Permission1Middleware'], function() {
+
 	Route::get('/users', 'UserController@index');
 
 	Route::get('/users/{user}', 'UserController@show');
