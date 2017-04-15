@@ -16,5 +16,22 @@ require('./bootstrap');
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#add-comment-form',
+
+    data: {
+		body: '',
+	},
+
+	methods: {
+ 		onSubmit() {
+ 			var id = document.getElementsByName('course')[0].value;
+ 			axios.post('/course/'+ id +'/comments', this.$data)
+ 			.then(response => { 
+ 				var div = document.getElementById('comments'); 
+ 				div.innerHTML = div.innerHTML + response.data;
+ 				this.body = '';
+ 			}) 
+ 			.catch(e => { console.error(e) })
+ 		}
+	}
 });

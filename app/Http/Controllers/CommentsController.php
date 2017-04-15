@@ -12,11 +12,11 @@ use App\Course;
 class CommentsController extends Controller
 {
     public function store(Course $course, StoreComment $request) {
-    	$course->comments()->create([
+    	$comment = $course->comments()->create([
     		'body' => request('body'),
     		'user_id' => $request->user()->id,
     	]);
 
-    	return back();
+    	return view('comments.show')->with(compact('comment'));
     }
 }

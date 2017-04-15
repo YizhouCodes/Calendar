@@ -21,31 +21,27 @@
 <hr>
 
 @include('layouts/errors')
-<div id="app"></div>
-<div class="card">
-	<div class="card-block">
-		{{ Form::open(['method' => 'post', 'action' => ['CommentsController@store', $course->id]]) }}
-			<div class="form-group">
-				<textarea name="body" placeholder="Your comment here." class="form-control" required></textarea>
-			</div>
-			<div class="form-group">
-			{{ Form::submit('Add comment', ['class' => 'btn btn-primary']) }}
-			</div>
-		{{ Form::close() }}
+<div>
+	<div class="card">
+		<div class="card-block">
+			<form id="add-comment-form" method="post" action="/course/{{ $course->id }}/comments" @submit.prevent="onSubmit">
+				<input type="hidden" name="course" value="{{$course->id}}"></input>
+				<div class="form-group">
+					<textarea name="body" placeholder="Your comment here." class="form-control" required v-model="body"></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary">Add comment</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 
-<div class="comments">
+<div id="comments">
 	@foreach ($course->comments as $comment)
-		<li class="list-group-item">
-			<strong>
-				{{ $comment->created_at->diffForHumans() }}
-			</strong>
-			{{ $comment->body }}
-		</li>
+		@include('comments/show');
 	@endforeach
 </div>
-
 
 
 

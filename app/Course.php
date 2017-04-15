@@ -13,6 +13,6 @@ class Course extends Model
     }
 
     public function user() {
-    	return $this->hasOne('App\AddedCourses');
+    	return $this->belongsTo('App\AddedCourses');
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
 @section('content')
-welcome
+<h1>Welcome to Course Calendar!</h1>
         
 @endsection
