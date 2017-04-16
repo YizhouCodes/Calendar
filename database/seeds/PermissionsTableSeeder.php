@@ -22,7 +22,7 @@ class PermissionsTableSeeder extends Seeder
 
         DB::table('permissions')->insert([
         	'id' => 2,
-        	'description' => 'Delete any course and comment.',
+        	'description' => 'Delete any course.',
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
