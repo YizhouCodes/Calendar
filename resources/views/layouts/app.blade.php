@@ -76,7 +76,7 @@
                                             </a>
                                         </li>
                                     @endif
-                                    @if (Gate::allows('show-users')) 
+                                    @if (Gate::allows('is-admin')) 
                                         <li>
                                             <a href="\users">
                                                 Show all users

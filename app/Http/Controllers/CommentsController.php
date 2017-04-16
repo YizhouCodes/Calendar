@@ -8,6 +8,8 @@ use App\Http\Requests\StoreComment;
 
 use App\Course;
 
+use App\Comment;
+
 
 class CommentsController extends Controller
 {
@@ -19,4 +21,5 @@ class CommentsController extends Controller
 
     	return view('comments.show')->with(compact('comment'));
     }
+
 }

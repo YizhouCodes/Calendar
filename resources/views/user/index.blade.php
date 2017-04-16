@@ -12,7 +12,7 @@
 			<p>Email: {{$user->email}}</p><br>
 			<form action="">
 				<label>Roles:</label><br>
-				<input type="checkbox" name="admin" value="admin" disabled @if (Gate::forUser($user)->allows('show-users')) checked @endif>Admin<br>
+				<input type="checkbox" name="admin" value="admin" disabled @if (Gate::forUser($user)->allows('is-admin')) checked @endif>Admin<br>
 				<input type="checkbox" name="moderator" value="moderator" disabled @if (Gate::forUser($user)->allows('is-moderator')) checked @endif>Moderator<br>
 				<input type="checkbox" name="student" value="student" disabled @if (Gate::forUser($user)->allows('is-student')) checked @endif>Student<br>
 			</form>

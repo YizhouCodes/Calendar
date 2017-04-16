@@ -15,8 +15,9 @@ require('./bootstrap');
 
 Vue.component('example', require('./components/Example.vue'));
 
+
 const app = new Vue({
-    el: '#add-comment-form',
+    el: '#root',
 
     data: {
 		body: '',
@@ -30,8 +31,7 @@ const app = new Vue({
  				var div = document.getElementById('comments'); 
  				div.innerHTML = div.innerHTML + response.data;
  				this.body = '';
- 			}) 
- 			.catch(e => { console.error(e) })
- 		}
+ 			});
+ 		},
 	}
 });

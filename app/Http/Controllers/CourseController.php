@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use App\Course;
 
+use App\Comment;
+
 use Auth;
 
 use Illuminate\Support\Facades\Input;
@@ -49,6 +51,9 @@ class CourseController extends Controller
     }
 
     public function destroy(Course $course) {
+        while (Comment::where('course_id', '=', $course->id)->get()->isNotEmpty()) {
+            Comment::where('course_id', '=', $course->id)->first()->delete();
+        }
     	Course::where('id', '=', $course->id)->first()->delete();
     	return redirect()->action('CourseController@index')->with('status', 'Course deleted!');
     }

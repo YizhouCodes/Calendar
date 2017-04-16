@@ -973,7 +973,7 @@ __webpack_require__(30);
 Vue.component('example', __webpack_require__(34));
 
 var app = new Vue({
-  el: '#add-comment-form',
+  el: '#root',
 
   data: {
     body: ''
@@ -988,9 +988,11 @@ var app = new Vue({
         var div = document.getElementById('comments');
         div.innerHTML = div.innerHTML + response.data;
         _this.body = '';
-      }).catch(function (e) {
-        console.error(e);
       });
+    },
+    onDelete: function onDelete(event) {
+      var id = event.target.name;
+      axios.delete('/course/' + id + '/destroy');
     }
   }
 });

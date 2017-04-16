@@ -1,5 +1,12 @@
 @extends('layouts.app')
 @section('content')
+
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+
 <h2>{{$course->name}} {{$course->credit}} credits</h2><br>
 <p>{{$course->description}}</p><br>
 <p>Teacher: {{$course->teacher_name}}</p><br>
@@ -20,11 +27,11 @@
 
 <hr>
 
-@include('layouts/errors')
-<div>
+
+<div id="root">
 	<div class="card">
 		<div class="card-block">
-			<form id="add-comment-form" method="post" action="/course/{{ $course->id }}/comments" @submit.prevent="onSubmit">
+			<form method="post" action="/course/{{ $course->id }}/comments" @submit.prevent="onSubmit">
 				<input type="hidden" name="course" value="{{$course->id}}"></input>
 				<div class="form-group">
 					<textarea name="body" placeholder="Your comment here." class="form-control" required v-model="body"></textarea>
@@ -35,12 +42,12 @@
 			</form>
 		</div>
 	</div>
-</div>
-
-<div id="comments">
-	@foreach ($course->comments as $comment)
-		@include('comments/show');
-	@endforeach
+	
+	<div id="comments">
+		@foreach ($course->comments as $comment)
+			@include('comments/show');
+		@endforeach
+	</div>
 </div>
 
 

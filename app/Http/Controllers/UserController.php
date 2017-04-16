@@ -6,6 +6,10 @@ use App\Http\Requests\StoreUser;
 
 use App\User;
 
+use App\Comment;
+
+use App\Course;
+
 use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
@@ -20,7 +24,14 @@ class UserController extends Controller
     }
 
     public function destroy(User $user) {
-    	User::where('id', '=', $user->id)->first()->delete();
+        while (Comment::where('user_id', '=', $user->id)->get()->isNotEmpty()) {
+            Comment::where('user_id', '=', $user->id)->first()->delete();
+        }
+        while (Course::where('user_id', '=', $user->id)->get()->isNotEmpty()) {
+            Course::where('user_id', '=', $user->id)->first()->delete();
+        }
+        User::where('id', '=', $user->id)->first()->delete();
+
     	return redirect()->action('UserController@index')->with('status', 'User deleted!');
     }
 
@@ -40,9 +51,9 @@ class UserController extends Controller
     		$user->roles()->detach(1);
     	}
 
-    	if (Input::get('teacher') == 'on' && $user->roles->find(2) == null) {
+    	if (Input::get('moderator') == 'on' && $user->roles->find(2) == null) {
     		$user->roles()->attach(2);
-    	} else if (Input::get('teacher') != 'on' && $user->roles->find(2) != null) {
+    	} else if (Input::get('moderator') != 'on' && $user->roles->find(2) != null) {
     		$user->roles()->detach(2);
     	}
 
