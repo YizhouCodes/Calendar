@@ -1,1 +1,1 @@
-users: student, teacher and admin
+Harjoitustyö on esimerkkisovelluksen kaltainen kurssikalenteri-sovellus. 
